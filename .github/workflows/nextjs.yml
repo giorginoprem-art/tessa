@@ -57,11 +57,17 @@ jobs:
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
       - name: Build with Next.js
         run: ${{ steps.detect-package-manager.outputs.runner }} next build
-      - name: Export static site
+      - name: Prepare for deployment
         run: |
-          mkdir -p out
-          cp -r .next/static out/
-          cp -r public out/ 2>/dev/null || true
+          # Next.js dengan output: export menghasilkan folder out/
+          # Pastikan folder out ada dan include public files
+          if [ -d "out" ]; then
+            echo "✓ out folder exists"
+            ls -la out/ | head -20
+          else
+            echo "Error: out folder tidak ditemukan"
+            exit 1
+          fi
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
