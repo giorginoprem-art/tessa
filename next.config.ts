@@ -1,13 +1,20 @@
 import type { NextConfig } from "next";
 
+const isProduction = process.env.NODE_ENV === "production";
+const basePath = isProduction ? "/tessa" : "";
+
 const nextConfig: NextConfig = {
   // Gunakan static export untuk GitHub Pages
   output: "export",
   // basePath untuk GitHub Pages dengan path /tessa/
-  basePath: process.env.NODE_ENV === "production" ? "/tessa" : "",
+  basePath: basePath,
   // Disable image optimization untuk static export
   images: {
     unoptimized: true,
+  },
+  // Expose basePath ke client-side environment
+  env: {
+    NEXT_PUBLIC_BASE_PATH: basePath,
   },
   typescript: {
     ignoreBuildErrors: false,

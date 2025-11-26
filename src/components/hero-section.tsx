@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { translations, Language } from '@/lib/translations';
 import { SEO_DATA } from '@/lib/seo-data';
@@ -11,12 +12,16 @@ interface HeroSectionProps {
 
 export function HeroSection({ currentLanguage }: HeroSectionProps) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const router = useRouter();
   const t = translations[currentLanguage];
+  
+  // Get basePath from next.config.ts
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
 
   const heroImages = [
-    '/images/hero/barong-statue.jpg',
-    '/images/hero/nusa-penida-beach.jpg',
-    '/images/hero/kedonganan-sunset.jpg'
+    `${basePath}/images/hero/barong-statue.jpg`,
+    `${basePath}/images/hero/nusa-penida-beach.jpg`,
+    `${basePath}/images/hero/kedonganan-sunset.jpg`
   ];
 
   useEffect(() => {

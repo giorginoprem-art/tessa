@@ -11,15 +11,18 @@ interface CarsSectionProps {
 
 export function CarsSection({ currentLanguage }: CarsSectionProps) {
   const t = translations[currentLanguage];
+  
+  // Get basePath from next.config.ts
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
 
   const carImageMap: { [key: string]: string } = {
-    'avanza': '/images/cars/avanza.png',
-    'allnew-avanza': '/images/cars/all-new-avanza.png',
-    'xpander': '/images/cars/xpander.png',
-    'innova-reborn': '/images/cars/innova-reborn.webp',
-    'hiace-commuter': '/images/cars/hiace-commuter.png',
-    'hiace-premio': '/images/cars/hiace-premio.png',
-    'alphard': '/images/cars/toyota-alphard.png.webp',
+    'avanza': `${basePath}/images/cars/avanza.png`,
+    'allnew-avanza': `${basePath}/images/cars/all-new-avanza.png`,
+    'xpander': `${basePath}/images/cars/xpander.png`,
+    'innova-reborn': `${basePath}/images/cars/innova-reborn.webp`,
+    'hiace-commuter': `${basePath}/images/cars/hiace-commuter.png`,
+    'hiace-premio': `${basePath}/images/cars/hiace-premio.png`,
+    'alphard': `${basePath}/images/cars/toyota-alphard.png.webp`,
   };
 
   const formatPrice = (price: number) => {

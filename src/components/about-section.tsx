@@ -10,11 +10,14 @@ interface AboutSectionProps {
 export function AboutSection({ currentLanguage }: AboutSectionProps) {
   const t = translations[currentLanguage];
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  
+  // Get basePath from next.config.ts
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
 
   const aboutImages = [
-    '/images/about/bali-nature.jpg',
-    '/images/about/bali-island.jpg',
-    '/images/about/bali-tari-kecak.jpg'
+    `${basePath}/images/about/bali-nature.jpg`,
+    `${basePath}/images/about/bali-island.jpg`,
+    `${basePath}/images/about/bali-tari-kecak.jpg`
   ];
 
   useEffect(() => {
