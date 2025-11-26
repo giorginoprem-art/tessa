@@ -1,7 +1,14 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  output: "standalone",
+  // Gunakan static export untuk GitHub Pages
+  output: "export",
+  // basePath untuk GitHub Pages dengan path /tessa/
+  basePath: process.env.NODE_ENV === "production" ? "/tessa" : "",
+  // Disable image optimization untuk static export
+  images: {
+    unoptimized: true,
+  },
   typescript: {
     ignoreBuildErrors: false,
   },
