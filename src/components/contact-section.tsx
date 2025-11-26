@@ -1,6 +1,7 @@
 'use client';
 
 import { translations, Language } from '@/lib/translations';
+import { SEO_DATA } from '@/lib/seo-data';
 import { Phone, MessageCircle, Instagram, MapPin, Mail } from 'lucide-react';
 
 interface ContactSectionProps {
@@ -28,7 +29,7 @@ export function ContactSection({ currentLanguage }: ContactSectionProps) {
               <div className="p-3 bg-green-600 rounded-full group-hover:bg-green-500 transition-colors">
                 <Phone className="w-6 h-6 text-white" />
               </div>
-              <span className="text-lg text-white font-medium">+6285854965523</span>
+              <span className="text-lg text-white font-medium">{SEO_DATA.site.phone}</span>
             </div>
             
             <div className="flex items-center space-x-4 p-4 bg-gray-900 rounded-lg hover:bg-gray-800 transition-all duration-300 group">
@@ -49,7 +50,7 @@ export function ContactSection({ currentLanguage }: ContactSectionProps) {
               <div className="p-3 bg-green-600 rounded-full group-hover:bg-green-500 transition-colors">
                 <MapPin className="w-6 h-6 text-white" />
               </div>
-              <span className="text-lg text-white font-medium">Bali, Indonesia</span>
+              <span className="text-lg text-white font-medium">{SEO_DATA.site.address}</span>
             </div>
 
             <div className="mt-8 p-6 bg-gray-900 rounded-lg border border-green-600">
@@ -127,7 +128,7 @@ export function ContactSection({ currentLanguage }: ContactSectionProps) {
           
           <div className="max-w-2xl mx-auto">
             <a
-              href="https://wa.me/6285854965523?text=Hi! I'm interested in booking a car in Bali. Can you provide more information about your services and availability?"
+              href={`https://wa.me/${SEO_DATA.site.phone.replace(/\D/g, '')}?text=Hi! I'm interested in booking a car in Bali. Can you provide more information about your services and availability?`}
               target="_blank"
               rel="noopener noreferrer"
               className="block w-full bg-green-600 hover:bg-green-700 text-white text-center font-semibold py-4 px-6 rounded-lg transition-all duration-300 transform hover:scale-105"

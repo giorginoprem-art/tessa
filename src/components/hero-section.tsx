@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { translations, Language } from '@/lib/translations';
+import { SEO_DATA } from '@/lib/seo-data';
 
 interface HeroSectionProps {
   currentLanguage: Language;
@@ -28,7 +29,7 @@ export function HeroSection({ currentLanguage }: HeroSectionProps) {
 
   const handleWhatsAppClick = () => {
     const message = 'Halo, saya tertarik untuk booking mobil di Bali. Apakah mobil tersedia untuk hari ini?';
-    const whatsappUrl = `https://wa.me/6285854965523?text=${encodeURIComponent(message)}`;
+    const whatsappUrl = `https://wa.me/${SEO_DATA.site.phone.replace(/\D/g, '')}?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank');
   };
 

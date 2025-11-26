@@ -3,16 +3,7 @@
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { translations, Language } from '@/lib/translations';
-
-interface Car {
-  id: string;
-  name: string;
-  price: number;
-  image: string;
-  seats?: number;
-  transmission?: string;
-  fuel?: string;
-}
+import { SEO_DATA } from '@/lib/seo-data';
 
 interface CarsSectionProps {
   currentLanguage: Language;
@@ -21,88 +12,24 @@ interface CarsSectionProps {
 export function CarsSection({ currentLanguage }: CarsSectionProps) {
   const t = translations[currentLanguage];
 
-  const cars: Car[] = [
-    {
-      id: 'avanza',
-      name: 'Avanza',
-      price: 600000,
-      image: '/images/cars/avanza.png',
-      seats: 7,
-      transmission: 'Manual',
-      fuel: 'Petrol'
-    },
-    {
-      id: 'allnew-avanza',
-      name: 'Allnew Avanza',
-      price: 700000,
-      image: '/images/cars/all-new-avanza.png',
-      seats: 7,
-      transmission: 'Automatic',
-      fuel: 'Petrol'
-    },
-    {
-      id: 'xpander',
-      name: 'Xpander',
-      price: 700000,
-      image: '/images/cars/xpander.png',
-      seats: 7,
-      transmission: 'Automatic',
-      fuel: 'Petrol'
-    },
-    {
-      id: 'innova-reborn',
-      name: 'Innova Reborn',
-      price: 900000,
-      image: '/images/cars/innova-reborn.webp',
-      seats: 7,
-      transmission: 'Automatic',
-      fuel: 'Diesel'
-    },
-    {
-      id: 'hiace-commuter',
-      name: 'HiAce Commuter',
-      price: 1100000,
-      image: '/images/cars/hiace-commuter.png',
-      seats: 16,
-      transmission: 'Manual',
-      fuel: 'Diesel'
-    },
-    {
-      id: 'hiace-premio',
-      name: 'HiAce Premio',
-      price: 1300000,
-      image: '/images/cars/hiace-premio.png',
-      seats: 12,
-      transmission: 'Automatic',
-      fuel: 'Diesel'
-    },
-    {
-      id: 'alphard',
-      name: 'Toyota Alphard',
-      price: 1700000,
-      image: '/images/cars/toyota-alphard.png.webp',
-      seats: 7,
-      transmission: 'Automatic',
-      fuel: 'Petrol'
-    },
-    {
-      id: 'vellfire',
-      name: 'Toyota Vellfire',
-      price: 1700000,
-      image: '/images/cars/toyota-vellfire.png',
-      seats: 7,
-      transmission: 'Automatic',
-      fuel: 'Petrol'
-    }
-  ];
+  const carImageMap: { [key: string]: string } = {
+    'avanza': '/images/cars/avanza.png',
+    'allnew-avanza': '/images/cars/all-new-avanza.png',
+    'xpander': '/images/cars/xpander.png',
+    'innova-reborn': '/images/cars/innova-reborn.webp',
+    'hiace-commuter': '/images/cars/hiace-commuter.png',
+    'hiace-premio': '/images/cars/hiace-premio.png',
+    'alphard': '/images/cars/toyota-alphard.png.webp',
+  };
 
   const formatPrice = (price: number) => {
     return new Intl.NumberFormat('id-ID').format(price);
   };
 
   const handleBookNow = (carName: string, price: number) => {
+    const phoneNumber = SEO_DATA.site.phone.replace(/\D/g, '');
     const message = `Halo, saya ingin booking mobil ${carName} dengan harga Rp ${formatPrice(price)} per 10 jam. Apakah mobil tersedia?`;
-    const whatsappUrl = `https://wa.me/6285854965523?text=${encodeURIComponent(message)}`;
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank');
   };
 
@@ -117,12 +44,12 @@ export function CarsSection({ currentLanguage }: CarsSectionProps) {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {cars.map((car) => (
+          {SEO_DATA.vehicles.map((car) => (
             <Card key={car.id} className="bg-gray-800 border-gray-700 hover:border-green-600 transition-all duration-300 hover:shadow-xl hover:shadow-green-600/20">
               <CardHeader className="p-0">
                 <div className="relative h-48 overflow-hidden rounded-t-lg">
                   <img
-                    src={car.image}
+                    src={carImageMap[car.id] || '/images/cars/default.png'}
                     alt={car.name}
                     className={`w-full h-full hover:scale-110 transition-transform duration-300 ${
                       ['avanza', 'innova-reborn', 'hiace-premio'].includes(car.id) 
